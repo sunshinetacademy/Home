@@ -1,0 +1,2909 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunshine T Academy — بنحوّل الحلم لكود</title>
+<meta name="description" content="أكاديمية Sunshine T لتعليم البرمجة والتكنولوجيا للأطفال والمبتدئين في مصر">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@300;400;600;700;900&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- AOS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+/* ============================================
+   CSS VARIABLES — DESIGN SYSTEM
+   ============================================ */
+:root {
+  --bg-primary:    #0d0f1a;
+  --bg-secondary:  #13162b;
+  --bg-card:       #1a1f38;
+  --bg-card-hover: #1f2540;
+  --accent-gold:   #f5c518;
+  --accent-blue:   #4fc3f7;
+  --accent-teal:   #4ec9b0;
+  --accent-purple: #c586c0;
+  --accent-orange: #ff7043;
+  --text-primary:  #e8eaf0;
+  --text-secondary:#8892a4;
+  --text-muted:    #4a5568;
+  --border:        #1e2540;
+  --border-glow:   rgba(245,197,24,0.3);
+  --glow-gold:     rgba(245,197,24,0.12);
+  --glow-blue:     rgba(79,195,247,0.12);
+  --radius:        16px;
+  --radius-sm:     8px;
+  --shadow:        0 8px 32px rgba(0,0,0,0.4);
+  --shadow-glow:   0 0 40px rgba(245,197,24,0.15);
+  --font-ar:       'Cairo', sans-serif;
+  --font-en:       'DM Sans', sans-serif;
+  --font-display:  'Orbitron', monospace;
+  --font-code:     'JetBrains Mono', monospace;
+  --transition:    0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ar);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body.lang-en { font-family: var(--font-en); }
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 100px 0; }
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  background: var(--glow-gold);
+  border: 1px solid rgba(245,197,24,0.2);
+  padding: 4px 14px;
+  border-radius: 100px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.section-title .highlight {
+  color: var(--accent-gold);
+  position: relative;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+}
+
+/* ============================================
+   BACKGROUND CANVAS (Stars)
+   ============================================ */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0;
+  transition: var(--transition);
+}
+
+.navbar.scrolled {
+  background: rgba(13,15,26,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 24px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--accent-gold), #ff9f00);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 0 20px rgba(245,197,24,0.4);
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-name {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.logo-sub {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent-gold);
+  background: var(--glow-gold);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.btn-lang:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.btn-enroll-nav {
+  padding: 9px 20px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent-gold), #ff9f00);
+  color: #0d0f1a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(245,197,24,0.3);
+}
+
+.btn-enroll-nav:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245,197,24,0.4);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0; right: 0;
+  background: rgba(13,15,26,0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 24px;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 999;
+}
+
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+.mobile-menu a:hover { color: var(--accent-gold); background: var(--glow-gold); }
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 60px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,197,24,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(79,195,247,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(78,201,176,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(245,197,24,0.25);
+  background: rgba(245,197,24,0.05);
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  margin-bottom: 32px;
+  animation: fadeDown 0.8s ease both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  animation: fadeUp 0.9s ease 0.1s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title .gold { color: var(--accent-gold); }
+.hero-title .blue { color: var(--accent-blue); }
+
+.hero-academy-name {
+  font-family: var(--font-ar);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  animation: fadeUp 0.9s ease 0.2s both;
+}
+
+.hero-tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  animation: fadeUp 0.9s ease 0.3s both;
+}
+
+.hero-tagline .tag-gold { color: var(--accent-gold); font-weight: 700; }
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.9s ease 0.4s both;
+  margin-bottom: 72px;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent-gold), #ff9f00);
+  color: #0d0f1a;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: 0 6px 24px rgba(245,197,24,0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(245,197,24,0.5);
+}
+
+.btn-secondary {
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border-glow);
+  color: var(--accent-gold);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover {
+  background: var(--glow-gold);
+  border-color: var(--accent-gold);
+  transform: translateY(-3px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.9s ease 0.5s both;
+  padding: 32px 40px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+.about {
+  position: relative;
+  z-index: 1;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-card-big {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card-big::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), var(--accent-teal));
+}
+
+.code-display {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.code-line { display: flex; gap: 8px; }
+.code-kw { color: var(--accent-purple); }
+.code-fn { color: var(--accent-blue); }
+.code-str { color: #ce9178; }
+.code-cm { color: #6a9955; }
+.code-num { color: #b5cea8; }
+.code-ln { color: var(--text-muted); user-select: none; margin-left: -8px; min-width: 24px; }
+
+.floating-badge {
+  position: absolute;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glow);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow);
+}
+
+.floating-badge.badge-1 {
+  bottom: -16px;
+  right: -16px;
+  color: var(--accent-teal);
+  border-color: rgba(78,201,176,0.3);
+}
+
+.floating-badge.badge-2 {
+  top: -16px;
+  left: -16px;
+  color: var(--accent-gold);
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.feature-card:nth-child(1) .feature-icon { background: rgba(245,197,24,0.12); color: var(--accent-gold); }
+.feature-card:nth-child(2) .feature-icon { background: rgba(79,195,247,0.12); color: var(--accent-blue); }
+.feature-card:nth-child(3) .feature-icon { background: rgba(78,201,176,0.12); color: var(--accent-teal); }
+.feature-card:nth-child(4) .feature-icon { background: rgba(197,134,192,0.12); color: var(--accent-purple); }
+
+.feature-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.feature-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   COURSES SECTION
+   ============================================ */
+.courses {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 0%, rgba(19,22,43,0.5) 50%, transparent 100%);
+}
+
+.courses-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.courses-header .section-subtitle { margin: 0 auto; }
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.course-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.course-card:hover::before { opacity: 1; }
+
+/* Course accent colors */
+.course-card[data-color="blue"]::before { background: linear-gradient(90deg, var(--accent-blue), transparent); }
+.course-card[data-color="teal"]::before { background: linear-gradient(90deg, var(--accent-teal), transparent); }
+.course-card[data-color="gold"]::before { background: linear-gradient(90deg, var(--accent-gold), transparent); }
+.course-card[data-color="orange"]::before { background: linear-gradient(90deg, var(--accent-orange), transparent); }
+.course-card[data-color="red"]::before { background: linear-gradient(90deg, #e34c26, transparent); }
+.course-card[data-color="purple"]::before { background: linear-gradient(90deg, var(--accent-purple), transparent); }
+.course-card[data-color="violet"]::before { background: linear-gradient(90deg, #7c4dff, transparent); }
+.course-card[data-color="cyan"]::before { background: linear-gradient(90deg, #00bcd4, transparent); }
+
+.course-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.course-card[data-color="blue"] .course-icon-wrap { background: rgba(79,195,247,0.12); }
+.course-card[data-color="teal"] .course-icon-wrap { background: rgba(78,201,176,0.12); }
+.course-card[data-color="gold"] .course-icon-wrap { background: rgba(245,197,24,0.12); }
+.course-card[data-color="orange"] .course-icon-wrap { background: rgba(255,112,67,0.12); }
+.course-card[data-color="red"] .course-icon-wrap { background: rgba(227,76,38,0.12); }
+.course-card[data-color="purple"] .course-icon-wrap { background: rgba(197,134,192,0.12); }
+.course-card[data-color="violet"] .course-icon-wrap { background: rgba(124,77,255,0.12); }
+.course-card[data-color="cyan"] .course-icon-wrap { background: rgba(0,188,212,0.12); }
+
+.course-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-code);
+}
+
+.badge-level { background: rgba(79,195,247,0.12); color: var(--accent-blue); }
+.badge-age { background: rgba(245,197,24,0.1); color: var(--accent-gold); }
+.badge-levels { background: rgba(78,201,176,0.12); color: var(--accent-teal); }
+
+.course-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.course-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.course-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.course-price {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.course-price span {
+  font-family: var(--font-ar);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  display: block;
+}
+
+.btn-details {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border-glow);
+  color: var(--accent-gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-details:hover {
+  background: var(--glow-gold);
+  border-color: var(--accent-gold);
+}
+
+/* ============================================
+   COURSE MODAL
+   ============================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  max-width: 780px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translateY(30px);
+  transition: var(--transition);
+  position: relative;
+}
+
+.modal-overlay.open .modal { transform: translateY(0); }
+
+.modal-header {
+  padding: 32px 32px 0;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.modal-close:hover { color: var(--text-primary); border-color: var(--accent-gold); }
+
+.modal-body { padding: 24px 32px 32px; }
+
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.gallery-thumb {
+  border-radius: 10px;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.modal-objectives { list-style: none; }
+.modal-objectives li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.modal-objectives li:last-child { border-bottom: none; }
+.modal-objectives li::before { content: '→'; color: var(--accent-gold); flex-shrink: 0; }
+
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--text-muted);
+}
+
+.video-placeholder .play-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(245,197,24,0.12);
+  border: 2px solid rgba(245,197,24,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+}
+
+/* ============================================
+   PRICING SECTION
+   ============================================ */
+.pricing {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.pricing-header .section-subtitle { margin: 0 auto; }
+
+.price-main {
+  text-align: center;
+  padding: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 24px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-main::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-gold), #ff9f00, var(--accent-gold));
+}
+
+.price-big {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.price-period { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; }
+
+.discounts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.discount-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.discount-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-4px);
+}
+
+.discount-icon { font-size: 2rem; margin-bottom: 12px; }
+.discount-pct {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  margin-bottom: 4px;
+}
+.discount-label { font-size: 0.85rem; font-weight: 600; }
+.discount-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+/* ============================================
+   ENROLLMENT FORM
+   ============================================ */
+.enroll {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 0%, rgba(19,22,43,0.5) 50%, transparent 100%);
+}
+
+.enroll-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.form-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), var(--accent-teal));
+}
+
+.form-section {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-section:last-of-type { border-bottom: none; }
+
+.form-section-title {
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+input, select, textarea {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(245,197,24,0.08);
+}
+
+select option { background: var(--bg-secondary); }
+textarea { resize: vertical; min-height: 100px; }
+
+.checkboxes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.85rem;
+}
+
+.checkbox-item:hover { border-color: var(--border-glow); background: var(--glow-gold); }
+.checkbox-item input[type="checkbox"] { width: auto; accent-color: var(--accent-gold); }
+
+.student-block {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.student-block-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-add-student {
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1.5px dashed var(--border-glow);
+  color: var(--accent-gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.btn-add-student:hover { background: var(--glow-gold); border-style: solid; }
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent-gold), #ff9f00);
+  color: #0d0f1a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: var(--transition);
+  box-shadow: 0 6px 24px rgba(245,197,24,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(245,197,24,0.5);
+}
+
+.form-success {
+  text-align: center;
+  padding: 48px;
+  display: none;
+}
+
+.form-success .success-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.form-success h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--accent-gold);
+}
+
+/* ============================================
+   TESTIMONIALS SECTION
+   ============================================ */
+.testimonials { position: relative; z-index: 1; }
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.testimonials-header .section-subtitle { margin: 0 auto; }
+
+.swiper { padding-bottom: 48px !important; }
+
+.swiper-slide { height: auto; }
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--transition);
+}
+
+.testimonial-card:hover { border-color: var(--border-glow); }
+
+.quote-icon { color: var(--accent-gold); font-size: 2rem; opacity: 0.4; }
+
+.testimonial-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #0d0f1a;
+  flex-shrink: 0;
+}
+
+.reviewer-name { font-weight: 700; font-size: 0.9rem; }
+.reviewer-course { font-size: 0.75rem; color: var(--text-muted); }
+
+.stars { color: var(--accent-gold); font-size: 0.8rem; }
+
+.swiper-pagination-bullet {
+  background: var(--text-muted) !important;
+}
+.swiper-pagination-bullet-active {
+  background: var(--accent-gold) !important;
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+.gallery { position: relative; z-index: 1; }
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.gallery-header .section-subtitle { margin: 0 auto; }
+
+.gallery-masonry {
+  columns: 3;
+  column-gap: 16px;
+}
+
+@media (max-width: 768px) { .gallery-masonry { columns: 2; } }
+@media (max-width: 480px) { .gallery-masonry { columns: 1; } }
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gallery-item:hover { border-color: var(--border-glow); transform: scale(1.02); }
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.gallery-thumb-big {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--bg-card);
+  padding: 40px 20px;
+  min-height: 160px;
+}
+
+.gallery-thumb-big.tall { min-height: 240px; }
+.gallery-thumb-big.short { min-height: 120px; }
+
+.gallery-item-emoji { font-size: 2.5rem; }
+.gallery-item-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(245,197,24,0.08);
+  border: 2px solid rgba(245,197,24,0.3);
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-overlay i { font-size: 1.5rem; color: var(--accent-gold); }
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+.contact { position: relative; z-index: 1; }
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+
+.contact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-card:hover {
+  border-color: var(--border-glow);
+  transform: translateX(-4px);
+}
+
+[dir="ltr"] .contact-card:hover { transform: translateX(4px); }
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-card.whatsapp .contact-icon { background: rgba(37,211,102,0.12); color: #25d366; }
+.contact-card.facebook .contact-icon { background: rgba(24,119,242,0.12); color: #1877f2; }
+.contact-card.instagram .contact-icon { background: rgba(225,48,108,0.12); color: #e1306c; }
+.contact-card.threads .contact-icon { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+
+.contact-label { font-size: 0.75rem; color: var(--text-muted); }
+.contact-value { font-weight: 700; font-size: 0.95rem; }
+
+.social-placeholder {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-name { font-size: 1.1rem; margin-bottom: 4px; display: block; }
+.footer-tagline { color: var(--text-secondary); font-size: 0.9rem; margin-top: 12px; }
+
+.footer-col h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-family: var(--font-code);
+}
+
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+.footer-links a:hover { color: var(--accent-gold); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.social-icon:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  background: var(--glow-gold);
+}
+
+/* WhatsApp FAB */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: white;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+  transition: var(--transition);
+  z-index: 500;
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 32px rgba(37,211,102,0.5);
+}
+
+[dir="ltr"] .whatsapp-fab { left: auto; right: 28px; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .courses-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 72px 0; }
+  .nav-links, .nav-actions .btn-lang { display: none; }
+  .hamburger { display: flex; }
+  .courses-grid { grid-template-columns: 1fr; }
+  .discounts-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .hero-stats { gap: 24px; padding: 24px; }
+  .modal-gallery { grid-template-columns: repeat(2, 1fr); }
+  .form-wrap { padding: 32px 24px; }
+  .modal-body { padding: 24px; }
+  .modal-header { padding: 24px 24px 0; }
+}
+
+@media (max-width: 480px) {
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .checkboxes-grid { grid-template-columns: 1fr 1fr; }
+  .about-features { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-center { text-align: center; }
+.mt-auto { margin-top: auto; }
+.hidden { display: none !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-gold); }
+
+/* Section divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Shimmer on primary buttons */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-15deg);
+  transition: none;
+}
+.btn-primary:hover::after {
+  animation: shimmer 0.6s ease forwards;
+}
+@keyframes shimmer {
+  from { left: -100%; }
+  to { left: 150%; }
+}
+
+/* Animated gold underline on section headings on scroll-in */
+[data-aos].section-title.aos-animate .highlight::after {
+  width: 100%;
+}
+.section-title .highlight {
+  position: relative;
+}
+.section-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gold);
+  transition: width 0.8s ease 0.3s;
+}
+[dir="ltr"] .section-title .highlight::after { right: auto; left: 0; }
+
+/* Pulse on WhatsApp FAB */
+.whatsapp-fab::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(37,211,102,0.4);
+  animation: wapulse 2s ease infinite;
+}
+@keyframes wapulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ============================================
+     NAVBAR
+     ============================================ -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">🌟</div>
+        <div class="logo-text">
+          <span class="logo-name">SUNSHINE T</span>
+          <span class="logo-sub" data-i18n="logoSub">أكاديمية البرمجة والتكنولوجيا</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about" data-i18n="navAbout">عن الأكاديمية</a></li>
+        <li><a href="#courses" data-i18n="navCourses">الكورسات</a></li>
+        <li><a href="#pricing" data-i18n="navPricing">الأسعار</a></li>
+        <li><a href="#testimonials" data-i18n="navTestimonials">آراء الطلاب</a></li>
+        <li><a href="#contact" data-i18n="navContact">تواصل معنا</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-lang" id="langToggle">
+          <i class="fa-solid fa-globe"></i>
+          <span id="langLabel">EN</span>
+        </button>
+        <a href="#enroll" class="btn-enroll-nav" data-i18n="navEnroll">سجّل الآن</a>
+      </div>
+
+      <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()" data-i18n="navAbout">عن الأكاديمية</a>
+  <a href="#courses" onclick="closeMobileMenu()" data-i18n="navCourses">الكورسات</a>
+  <a href="#pricing" onclick="closeMobileMenu()" data-i18n="navPricing">الأسعار</a>
+  <a href="#testimonials" onclick="closeMobileMenu()" data-i18n="navTestimonials">آراء الطلاب</a>
+  <a href="#contact" onclick="closeMobileMenu()" data-i18n="navContact">تواصل معنا</a>
+  <a href="#enroll" onclick="closeMobileMenu()" data-i18n="navEnroll">سجّل الآن</a>
+</div>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg-gradient"></div>
+
+  <div class="hero-badge">
+    <i class="fa-solid fa-code"></i>
+    <span data-i18n="heroBadge">أكاديمية برمجة وتكنولوجيا للأطفال والمبتدئين</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="gold">Sunshine</span> <span class="blue">T</span>
+  </h1>
+  <p class="hero-academy-name" data-i18n="heroAcademy">أكاديمية سانشاين تي</p>
+
+  <p class="hero-tagline">
+    <span class="tag-gold" data-i18n="heroTagline">بنحوّل الحلم لكود 🌟</span>
+    <br>
+    <span data-i18n="heroSub">تعلّم البرمجة بأسلوب عملي وممتع من عمر 7 سنين</span>
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#courses" class="btn-primary">
+      <i class="fa-solid fa-rocket"></i>
+      <span data-i18n="heroCTA1">استكشف الكورسات</span>
+    </a>
+    <a href="#enroll" class="btn-secondary">
+      <i class="fa-solid fa-user-plus"></i>
+      <span data-i18n="heroCTA2">سجّل الآن</span>
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-number" data-count="8">0</span>
+      <span class="stat-label" data-i18n="stat1">كورس متاح+</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-count="100">0</span>
+      <span class="stat-label" data-i18n="stat2">طالب وأكثر</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-count="7">0</span>
+      <span class="stat-label" data-i18n="stat3">من عمر 7 سنين</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-count="18">0</span>
+      <span class="stat-label" data-i18n="stat4">محاضرة / كورس</span>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span data-i18n="scrollDown">اسكرول للأسفل</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ============================================
+     ABOUT
+     ============================================ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual" data-aos="fade-left">
+        <div class="about-card-big">
+          <div class="code-display">
+            <div class="code-line"><span class="code-ln">1</span><span class="code-cm"># Sunshine T Academy 🌟</span></div>
+            <div class="code-line"><span class="code-ln">2</span></div>
+            <div class="code-line"><span class="code-ln">3</span><span class="code-kw">class</span> <span class="code-fn">Academy</span>:</div>
+            <div class="code-line"><span class="code-ln">4</span>&nbsp;&nbsp;<span class="code-fn">name</span> = <span class="code-str">"Sunshine T Academy"</span></div>
+            <div class="code-line"><span class="code-ln">5</span>&nbsp;&nbsp;<span class="code-fn">mission</span> = <span class="code-str">"بنحوّل الحلم لكود"</span></div>
+            <div class="code-line"><span class="code-ln">6</span>&nbsp;&nbsp;<span class="code-fn">students</span> = <span class="code-num">100</span><span class="code-str">+</span></div>
+            <div class="code-line"><span class="code-ln">7</span>&nbsp;&nbsp;<span class="code-fn">courses</span> = <span class="code-num">8</span></div>
+            <div class="code-line"><span class="code-ln">8</span></div>
+            <div class="code-line"><span class="code-ln">9</span>&nbsp;&nbsp;<span class="code-kw">def</span> <span class="code-fn">teach</span>(self, student):</div>
+            <div class="code-line"><span class="code-ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-kw">return</span> student.<span class="code-fn">transform</span>()</div>
+            <div class="code-line"><span class="code-ln">11</span></div>
+            <div class="code-line"><span class="code-ln">12</span><span class="code-cm"># ✅ أكاديمية تعليم البرمجة للأطفال</span></div>
+          </div>
+        </div>
+        <div class="floating-badge badge-1">
+          <i class="fa-solid fa-check-circle"></i>
+          <span>+100 طالب</span>
+        </div>
+        <div class="floating-badge badge-2">
+          <i class="fa-solid fa-star"></i>
+          <span>جودة عالية</span>
+        </div>
+      </div>
+
+      <div data-aos="fade-right">
+        <span class="section-tag" data-i18n="aboutTag">عن الأكاديمية</span>
+        <h2 class="section-title">
+          <span data-i18n="aboutTitle">نبني جيل</span>
+          <span class="highlight"> المبرمجين </span>
+          <span data-i18n="aboutTitle2">الصغار</span>
+        </h2>
+        <p class="section-subtitle" data-i18n="aboutDesc">
+          Sunshine T Academy أكاديمية متخصصة في تعليم البرمجة والتكنولوجيا للأطفال والمبتدئين في مصر.
+          بنقدم منهج عملي وممتع يخلي كل طفل يحب البرمجة ويفهمها من أول درس.
+        </p>
+
+        <div class="about-features">
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="feature-title" data-i18n="feat1Title">تعلم عملي</div>
+            <div class="feature-desc" data-i18n="feat1Desc">كل درس فيه أمثلة ومشاريع حقيقية</div>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="feature-icon"><i class="fa-solid fa-child"></i></div>
+            <div class="feature-title" data-i18n="feat2Title">للأطفال خصوصاً</div>
+            <div class="feature-desc" data-i18n="feat2Desc">منهج مصمم خصيصاً لعقلية الطفل</div>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon"><i class="fa-solid fa-certificate"></i></div>
+            <div class="feature-title" data-i18n="feat3Title">شهادات معتمدة</div>
+            <div class="feature-desc" data-i18n="feat3Desc">شهادة إتمام عند نهاية كل كورس</div>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="250">
+            <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+            <div class="feature-title" data-i18n="feat4Title">دعم مستمر</div>
+            <div class="feature-desc" data-i18n="feat4Desc">متابعة الطلاب على واتساب</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============================================
+     COURSES
+     ============================================ -->
+<section class="courses" id="courses">
+  <div class="container">
+    <div class="courses-header" data-aos="fade-up">
+      <span class="section-tag" data-i18n="coursesTag">الكورسات المتاحة</span>
+      <h2 class="section-title">
+        <span data-i18n="coursesTitle">كل </span>
+        <span class="highlight" data-i18n="coursesTitleHighlight">الكورسات</span>
+        <span data-i18n="coursesTitle2"> بتاعتنا</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="coursesSubtitle">
+        من سكراتش للأطفال الصغار لحد HTML و Python للمتقدمين — عندنا الكورس المناسب لكل مستوى
+      </p>
+    </div>
+
+    <div class="courses-grid" id="coursesGrid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     COURSE MODAL
+     ============================================ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="courseModal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div id="modalHeaderContent"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ============================================
+     PRICING
+     ============================================ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header" data-aos="fade-up">
+      <span class="section-tag" data-i18n="pricingTag">الأسعار والعروض</span>
+      <h2 class="section-title">
+        <span data-i18n="pricingTitle">أسعار </span>
+        <span class="highlight" data-i18n="pricingTitleHighlight">مناسبة</span>
+        <span data-i18n="pricingTitle2"> للجميع</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="pricingSubtitle">سعر ثابت وعروض خصم للأسر والطلاب القدامى</p>
+    </div>
+
+    <div class="price-main" data-aos="fade-up">
+      <div class="price-big">1800 <span style="font-size:1.5rem">EGP</span></div>
+      <div class="price-period" data-i18n="pricePerCourse">/ كورس / 18 محاضرة</div>
+      <p style="color:var(--text-muted);font-size:0.85rem;margin-top:12px" data-i18n="priceNote">
+        يتوفر تقسيط — تواصل معنا للتفاصيل
+      </p>
+    </div>
+
+    <div class="discounts-grid">
+      <div class="discount-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="discount-icon">🎓</div>
+        <div class="discount-pct">0%</div>
+        <div class="discount-label" data-i18n="disc1">طالب جديد</div>
+        <div class="discount-desc" data-i18n="disc1Desc">السعر الأساسي</div>
+      </div>
+      <div class="discount-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="discount-icon">👨‍👧</div>
+        <div class="discount-pct">10%</div>
+        <div class="discount-label" data-i18n="disc2">2 أشقاء</div>
+        <div class="discount-desc" data-i18n="disc2Desc">خصم على كل أخ/أخت إضافية</div>
+      </div>
+      <div class="discount-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="discount-icon">👨‍👧‍👦</div>
+        <div class="discount-pct">15%</div>
+        <div class="discount-label" data-i18n="disc3">3 أشقاء وأكثر</div>
+        <div class="discount-desc" data-i18n="disc3Desc">خصم على جميع الأشقاء</div>
+      </div>
+      <div class="discount-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="discount-icon">📦</div>
+        <div class="discount-pct">10%</div>
+        <div class="discount-label" data-i18n="disc4">باقة كورسين</div>
+        <div class="discount-desc" data-i18n="disc4Desc">تسجيل كورسين في نفس الوقت</div>
+      </div>
+      <div class="discount-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="discount-icon">🔄</div>
+        <div class="discount-pct">10%</div>
+        <div class="discount-label" data-i18n="disc5">طالب قديم</div>
+        <div class="discount-desc" data-i18n="disc5Desc">أتمّ كورس سابق معنا</div>
+      </div>
+      <div class="discount-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="discount-icon">💳</div>
+        <div class="discount-pct">—</div>
+        <div class="discount-label" data-i18n="disc6">تقسيط متاح</div>
+        <div class="discount-desc" data-i18n="disc6Desc">اسأل عن خطة التقسيط</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============================================
+     ENROLLMENT FORM
+     ============================================ -->
+<section class="enroll" id="enroll">
+  <div class="container">
+    <div class="enroll-header" data-aos="fade-up">
+      <span class="section-tag" data-i18n="enrollTag">التسجيل</span>
+      <h2 class="section-title">
+        <span data-i18n="enrollTitle">ابدأ </span>
+        <span class="highlight" data-i18n="enrollTitleHighlight">رحلتك</span>
+        <span data-i18n="enrollTitle2"> دلوقتي</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="enrollSubtitle">
+        املأ البيانات وهنتواصل معاك على الواتساب خلال 24 ساعة
+      </p>
+    </div>
+
+    <div class="form-wrap" data-aos="fade-up" data-aos-delay="100">
+      <div id="formContent">
+        <!-- Parent Info -->
+        <div class="form-section">
+          <div class="form-section-title"><i class="fa-solid fa-user"></i> <span data-i18n="parentInfo">بيانات ولي الأمر</span></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="parentName">اسم ولي الأمر *</label>
+              <input type="text" id="parentName" placeholder="الاسم الكامل" required>
+            </div>
+            <div class="form-group">
+              <label data-i18n="parentPhone">رقم الواتساب *</label>
+              <input type="tel" id="parentPhone" placeholder="01xxxxxxxxx" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="parentEmail">البريد الإلكتروني (اختياري)</label>
+              <input type="email" id="parentEmail" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label data-i18n="parentCountry">الدولة *</label>
+              <select id="parentCountry">
+                <option value="">اختر الدولة</option>
+                <option value="مصر">🇪🇬 مصر</option>
+                <option value="السعودية">🇸🇦 السعودية</option>
+                <option value="الإمارات">🇦🇪 الإمارات</option>
+                <option value="الكويت">🇰🇼 الكويت</option>
+                <option value="قطر">🇶🇦 قطر</option>
+                <option value="أخرى">🌍 أخرى</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="parentCity">المدينة</label>
+            <input type="text" id="parentCity" placeholder="اسم المدينة">
+          </div>
+          <div class="form-group">
+            <label data-i18n="howHeard">عرفت عن الأكاديمية منين؟</label>
+            <select id="howHeard">
+              <option value="">اختر</option>
+              <option value="فيسبوك">فيسبوك</option>
+              <option value="إنستقرام">إنستقرام</option>
+              <option value="صديق أو معارف">صديق أو معارف</option>
+              <option value="جوجل">جوجل</option>
+              <option value="أخرى">أخرى</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Number of students -->
+        <div class="form-section">
+          <div class="form-section-title"><i class="fa-solid fa-users"></i> <span data-i18n="studentsInfo">بيانات الطلاب</span></div>
+          <div class="form-group">
+            <label data-i18n="numStudents">عدد الطلاب المسجلين</label>
+            <select id="numStudents" onchange="updateStudentBlocks()">
+              <option value="1">1 طالب</option>
+              <option value="2">2 طالبين</option>
+              <option value="3">3 طلاب</option>
+              <option value="4">4 طلاب</option>
+            </select>
+          </div>
+          <div id="studentsContainer"></div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-section">
+          <div class="form-section-title"><i class="fa-solid fa-comment"></i> <span data-i18n="notes">ملاحظات</span></div>
+          <div class="form-group">
+            <label data-i18n="notesLabel">أي استفسار أو ملاحظة؟</label>
+            <textarea id="notes" placeholder="اكتب استفسارك هنا..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span data-i18n="submitBtn">أرسل على الواتساب</span>
+        </button>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">🎉</div>
+        <h3 data-i18n="successTitle">تم الإرسال بنجاح!</h3>
+        <p style="color:var(--text-secondary)" data-i18n="successMsg">
+          هيتفتح واتساب دلوقتي — هنتواصل معاك خلال 24 ساعة ✨
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TESTIMONIALS
+     ============================================ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="testimonials-header" data-aos="fade-up">
+      <span class="section-tag" data-i18n="testimTag">آراء الطلاب وأولياء الأمور</span>
+      <h2 class="section-title">
+        <span data-i18n="testimTitle">بيقولوا </span>
+        <span class="highlight" data-i18n="testimTitleHighlight">إيه</span>
+        <span data-i18n="testimTitle2"> عنّا؟</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="testimSubtitle">
+        تجارب حقيقية من أولياء الأمور والطلاب اللي اتعلموا معانا
+      </p>
+    </div>
+
+    <div class="swiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper" id="testimonialsContainer"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     GALLERY
+     ============================================ -->
+<div class="divider"></div>
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="gallery-header" data-aos="fade-up">
+      <span class="section-tag" data-i18n="galleryTag">معرض الأعمال</span>
+      <h2 class="section-title">
+        <span data-i18n="galleryTitle">أعمال </span>
+        <span class="highlight" data-i18n="galleryTitleHighlight">طلابنا</span>
+        <span data-i18n="galleryTitle2"> ومشاريعهم</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="gallerySubtitle">
+        مشاريع ومنتجات حقيقية خرجت من أيادي طلاب Sunshine T Academy
+      </p>
+    </div>
+
+    <div class="gallery-masonry" data-aos="fade-up" data-aos-delay="100">
+      <div class="gallery-item">
+        <div class="gallery-thumb-big tall" style="background: linear-gradient(135deg, rgba(79,195,247,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🎮</div>
+          <div class="gallery-item-label" data-i18n="gal1">ألعاب Scratch</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big short" style="background: linear-gradient(135deg, rgba(245,197,24,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🐍</div>
+          <div class="gallery-item-label" data-i18n="gal2">مشاريع Python</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big" style="background: linear-gradient(135deg, rgba(227,76,38,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🌐</div>
+          <div class="gallery-item-label" data-i18n="gal3">مواقع HTML + CSS</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big" style="background: linear-gradient(135deg, rgba(78,201,176,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">📱</div>
+          <div class="gallery-item-label" data-i18n="gal4">تطبيقات App Inventor</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big tall" style="background: linear-gradient(135deg, rgba(255,112,67,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🤖</div>
+          <div class="gallery-item-label" data-i18n="gal5">مشاريع Arduino</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big short" style="background: linear-gradient(135deg, rgba(124,77,255,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🏆</div>
+          <div class="gallery-item-label" data-i18n="gal6">حفل تسليم الشهادات</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big" style="background: linear-gradient(135deg, rgba(0,188,212,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🎨</div>
+          <div class="gallery-item-label" data-i18n="gal7">تصاميم Canva</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big tall" style="background: linear-gradient(135deg, rgba(197,134,192,0.08), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">👨‍💻</div>
+          <div class="gallery-item-label" data-i18n="gal8">جلسات البرمجة الحية</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-thumb-big" style="background: linear-gradient(135deg, rgba(245,197,24,0.06), rgba(79,195,247,0.06), rgba(13,15,26,1));">
+          <div class="gallery-item-emoji">🌟</div>
+          <div class="gallery-item-label" data-i18n="gal9">لحظات نجاح الطلاب</div>
+        </div>
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT
+     ============================================ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-header" data-aos="fade-up">
+      <span class="section-tag" data-i18n="contactTag">تواصل معنا</span>
+      <h2 class="section-title">
+        <span data-i18n="contactTitle">إحنا </span>
+        <span class="highlight" data-i18n="contactTitleHighlight">هنا</span>
+        <span data-i18n="contactTitle2"> دايماً</span>
+      </h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info" data-aos="fade-right">
+        <a href="https://wa.me/201080680930" target="_blank" class="contact-card whatsapp">
+          <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div>
+            <div class="contact-label" data-i18n="contactWhatsapp">واتساب</div>
+            <div class="contact-value">01080680930</div>
+          </div>
+        </a>
+        <a href="https://www.facebook.com/share/1CoHWu8fmf/" target="_blank" class="contact-card facebook">
+          <div class="contact-icon"><i class="fa-brands fa-facebook"></i></div>
+          <div>
+            <div class="contact-label" data-i18n="contactFacebook">فيسبوك</div>
+            <div class="contact-value">Sunshine T Academy</div>
+          </div>
+        </a>
+        <div class="contact-card instagram">
+          <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+          <div>
+            <div class="contact-label">إنستقرام</div>
+            <div class="social-placeholder" data-i18n="comingSoon">قريباً ✨</div>
+          </div>
+        </div>
+        <div class="contact-card threads">
+          <div class="contact-icon"><i class="fa-brands fa-threads"></i></div>
+          <div>
+            <div class="contact-label">Threads / Twitter</div>
+            <div class="social-placeholder" data-i18n="comingSoon">قريباً ✨</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-aos="fade-left">
+        <div class="about-card-big" style="height:100%">
+          <h3 style="margin-bottom:16px;color:var(--accent-gold)" data-i18n="sendMsg">ابعتلنا رسالة مباشرة</h3>
+          <div class="form-group">
+            <label data-i18n="msgName">اسمك</label>
+            <input type="text" id="contactName" placeholder="اسمك هنا">
+          </div>
+          <div class="form-group">
+            <label data-i18n="msgText">رسالتك</label>
+            <textarea id="contactMsg" placeholder="استفسارك أو رسالتك..." style="min-height:120px"></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%;justify-content:center;margin-top:8px" onclick="sendContactMsg()">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span data-i18n="sendViawp">أرسل على واتساب</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:16px">
+          <div class="logo-icon">🌟</div>
+          <div class="logo-text">
+            <span class="logo-name">SUNSHINE T ACADEMY</span>
+          </div>
+        </div>
+        <p class="footer-tagline" data-i18n="footerTagline">بنحوّل الحلم لكود — تعليم البرمجة والتكنولوجيا للأطفال والمبتدئين</p>
+        <div class="social-icons" style="margin-top:20px">
+          <a href="https://www.facebook.com/share/1CoHWu8fmf/" class="social-icon" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://wa.me/201080680930" class="social-icon" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-threads"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footerLinks">روابط سريعة</h4>
+        <div class="footer-links">
+          <a href="#home" data-i18n="navHome">الرئيسية</a>
+          <a href="#about" data-i18n="navAbout">عن الأكاديمية</a>
+          <a href="#courses" data-i18n="navCourses">الكورسات</a>
+          <a href="#pricing" data-i18n="navPricing">الأسعار</a>
+          <a href="#enroll" data-i18n="navEnroll">التسجيل</a>
+          <a href="#gallery" data-i18n="navGallery">المعرض</a>
+        </div>
+      </div>
+        <h4 data-i18n="footerCourses">الكورسات</h4>
+        <div class="footer-links">
+          <a href="#courses">Scratch</a>
+          <a href="#courses">Python</a>
+          <a href="#courses">HTML + CSS</a>
+          <a href="#courses">Arduino</a>
+          <a href="#courses">Java</a>
+          <a href="#courses">Canva</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="copyright">© 2026 Sunshine T Academy — جميع الحقوق محفوظة</span>
+      <span style="color:var(--accent-gold)">🌟 بنحوّل الحلم لكود</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/201080680930" class="whatsapp-fab" target="_blank" title="تكلم معنا على واتساب">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- ============================================
+     SCRIPTS
+     ============================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+/* ============================================
+   TRANSLATIONS
+   ============================================ */
+const translations = {
+  ar: {
+    logoSub: "أكاديمية البرمجة والتكنولوجيا",
+    navAbout: "عن الأكاديمية", navCourses: "الكورسات",
+    navPricing: "الأسعار", navTestimonials: "آراء الطلاب",
+    navContact: "تواصل معنا", navEnroll: "سجّل الآن", navHome: "الرئيسية", navGallery: "المعرض",
+    heroBadge: "أكاديمية برمجة وتكنولوجيا للأطفال والمبتدئين",
+    heroAcademy: "أكاديمية سانشاين تي",
+    heroTagline: "بنحوّل الحلم لكود 🌟",
+    heroSub: "تعلّم البرمجة بأسلوب عملي وممتع من عمر 7 سنين",
+    heroCTA1: "استكشف الكورسات", heroCTA2: "سجّل الآن",
+    stat1: "كورس متاح+", stat2: "طالب وأكثر",
+    stat3: "من عمر 7 سنين", stat4: "محاضرة / كورس",
+    scrollDown: "اسكرول للأسفل",
+    aboutTag: "عن الأكاديمية", aboutTitle: "نبني جيل",
+    aboutTitle2: "المبرمجين الصغار",
+    aboutDesc: "Sunshine T Academy أكاديمية متخصصة في تعليم البرمجة والتكنولوجيا للأطفال والمبتدئين في مصر. بنقدم منهج عملي وممتع يخلي كل طفل يحب البرمجة ويفهمها من أول درس.",
+    feat1Title: "تعلم عملي", feat1Desc: "كل درس فيه أمثلة ومشاريع حقيقية",
+    feat2Title: "للأطفال خصوصاً", feat2Desc: "منهج مصمم خصيصاً لعقلية الطفل",
+    feat3Title: "شهادات معتمدة", feat3Desc: "شهادة إتمام عند نهاية كل كورس",
+    feat4Title: "دعم مستمر", feat4Desc: "متابعة الطلاب على واتساب",
+    coursesTag: "الكورسات المتاحة", coursesTitle: "كل ",
+    coursesTitleHighlight: "الكورسات", coursesTitle2: " بتاعتنا",
+    coursesSubtitle: "من سكراتش للأطفال الصغار لحد HTML و Python للمتقدمين — عندنا الكورس المناسب لكل مستوى",
+    pricingTag: "الأسعار والعروض", pricingTitle: "أسعار ",
+    pricingTitleHighlight: "مناسبة", pricingTitle2: " للجميع",
+    pricingSubtitle: "سعر ثابت وعروض خصم للأسر والطلاب القدامى",
+    pricePerCourse: "/ كورس / 18 محاضرة",
+    priceNote: "يتوفر تقسيط — تواصل معنا للتفاصيل",
+    disc1: "طالب جديد", disc1Desc: "السعر الأساسي",
+    disc2: "2 أشقاء", disc2Desc: "خصم على كل أخ/أخت إضافية",
+    disc3: "3 أشقاء وأكثر", disc3Desc: "خصم على جميع الأشقاء",
+    disc4: "باقة كورسين", disc4Desc: "تسجيل كورسين في نفس الوقت",
+    disc5: "طالب قديم", disc5Desc: "أتمّ كورس سابق معنا",
+    disc6: "تقسيط متاح", disc6Desc: "اسأل عن خطة التقسيط",
+    enrollTag: "التسجيل", enrollTitle: "ابدأ ",
+    enrollTitleHighlight: "رحلتك", enrollTitle2: " دلوقتي",
+    enrollSubtitle: "املأ البيانات وهنتواصل معاك على الواتساب خلال 24 ساعة",
+    parentInfo: "بيانات ولي الأمر",
+    parentName: "اسم ولي الأمر *", parentPhone: "رقم الواتساب *",
+    parentEmail: "البريد الإلكتروني (اختياري)", parentCountry: "الدولة *",
+    parentCity: "المدينة", howHeard: "عرفت عن الأكاديمية منين؟",
+    studentsInfo: "بيانات الطلاب", numStudents: "عدد الطلاب المسجلين",
+    notes: "ملاحظات", notesLabel: "أي استفسار أو ملاحظة؟",
+    submitBtn: "أرسل على الواتساب",
+    successTitle: "تم الإرسال بنجاح!",
+    successMsg: "هيتفتح واتساب دلوقتي — هنتواصل معاك خلال 24 ساعة ✨",
+    testimTag: "آراء الطلاب وأولياء الأمور",
+    testimTitle: "بيقولوا ", testimTitleHighlight: "إيه", testimTitle2: " عنّا؟",
+    testimSubtitle: "تجارب حقيقية من أولياء الأمور والطلاب اللي اتعلموا معانا",
+    contactTag: "تواصل معنا", contactTitle: "إحنا ",
+    contactTitleHighlight: "هنا", contactTitle2: " دايماً",
+    contactWhatsapp: "واتساب", contactFacebook: "فيسبوك",
+    comingSoon: "قريباً ✨",
+    sendMsg: "ابعتلنا رسالة مباشرة",
+    msgName: "اسمك", msgText: "رسالتك", sendViawp: "أرسل على واتساب",
+    footerTagline: "بنحوّل الحلم لكود — تعليم البرمجة والتكنولوجيا للأطفال والمبتدئين",
+    footerLinks: "روابط سريعة", footerCourses: "الكورسات",
+    copyright: "© 2026 Sunshine T Academy — جميع الحقوق محفوظة",
+    viewDetails: "التفاصيل", perCourse: "/ كورس",
+    modalAge: "العمر المناسب", modalDuration: "المدة",
+    modalLevel: "المستوى", modalObjectives: "أهداف الكورس",
+    modalCurriculum: "محتوى الكورس", modalEnrollNow: "سجّل في هذا الكورس",
+    modalGallery: "معرض الصور", modalVideoTitle: "شاهد مقدمة الكورس",
+    modalVideoSub: "فيديو تعريفي قريباً",
+    galleryTag: "معرض الأعمال", galleryTitle: "أعمال ",
+    galleryTitleHighlight: "طلابنا", galleryTitle2: " ومشاريعهم",
+    gallerySubtitle: "مشاريع ومنتجات حقيقية خرجت من أيادي طلاب Sunshine T Academy",
+    gal1: "ألعاب Scratch", gal2: "مشاريع Python", gal3: "مواقع HTML + CSS",
+    gal4: "تطبيقات App Inventor", gal5: "مشاريع Arduino", gal6: "حفل تسليم الشهادات",
+    gal7: "تصاميم Canva", gal8: "جلسات البرمجة الحية", gal9: "لحظات نجاح الطلاب"
+  },
+  en: {
+    logoSub: "Coding & Technology Academy",
+    navAbout: "About", navCourses: "Courses",
+    navPricing: "Pricing", navTestimonials: "Reviews",
+    navContact: "Contact", navEnroll: "Enroll Now", navHome: "Home", navGallery: "Gallery",
+    heroBadge: "Coding & Technology Academy for Kids & Beginners",
+    heroAcademy: "Sunshine T Academy",
+    heroTagline: "We Turn Dreams Into Code 🌟",
+    heroSub: "Learn coding in a fun, practical way — starting from age 7",
+    heroCTA1: "Explore Courses", heroCTA2: "Enroll Now",
+    stat1: "Courses Available", stat2: "Students & More",
+    stat3: "Starting Age 7+", stat4: "Sessions / Course",
+    scrollDown: "Scroll Down",
+    aboutTag: "About Us", aboutTitle: "Building the Next",
+    aboutTitle2: "Generation of Coders",
+    aboutDesc: "Sunshine T Academy is a specialized academy for teaching coding and technology to children and beginners in Egypt. We offer a practical, fun curriculum that makes every child love coding from day one.",
+    feat1Title: "Practical Learning", feat1Desc: "Every lesson includes examples and real projects",
+    feat2Title: "Kid-Focused", feat2Desc: "Curriculum designed specifically for how kids learn",
+    feat3Title: "Certificates", feat3Desc: "Completion certificate after every course",
+    feat4Title: "Ongoing Support", feat4Desc: "Student follow-up on WhatsApp",
+    coursesTag: "Available Courses", coursesTitle: "All Our ",
+    coursesTitleHighlight: "Courses", coursesTitle2: "",
+    coursesSubtitle: "From Scratch for young kids to HTML & Python for advanced learners — we have the right course for every level",
+    pricingTag: "Pricing & Offers", pricingTitle: "Affordable ",
+    pricingTitleHighlight: "Pricing", pricingTitle2: " for Everyone",
+    pricingSubtitle: "Fixed pricing with discounts for families and returning students",
+    pricePerCourse: "/ course / 18 sessions",
+    priceNote: "Installment plans available — contact us for details",
+    disc1: "New Student", disc1Desc: "Regular price",
+    disc2: "2 Siblings", disc2Desc: "Discount per additional sibling",
+    disc3: "3+ Siblings", disc3Desc: "Discount applied to all siblings",
+    disc4: "2-Course Bundle", disc4Desc: "Enroll in 2 courses simultaneously",
+    disc5: "Returning Student", disc5Desc: "Completed at least one previous course",
+    disc6: "Installments", disc6Desc: "Ask about our payment plan",
+    enrollTag: "Enrollment", enrollTitle: "Start Your ",
+    enrollTitleHighlight: "Journey", enrollTitle2: " Today",
+    enrollSubtitle: "Fill in your details and we'll contact you on WhatsApp within 24 hours",
+    parentInfo: "Guardian Information",
+    parentName: "Guardian Name *", parentPhone: "WhatsApp Number *",
+    parentEmail: "Email (optional)", parentCountry: "Country *",
+    parentCity: "City", howHeard: "How did you hear about us?",
+    studentsInfo: "Student Information", numStudents: "Number of Students",
+    notes: "Notes", notesLabel: "Any questions or notes?",
+    submitBtn: "Send via WhatsApp",
+    successTitle: "Sent Successfully!", 
+    successMsg: "WhatsApp will open now — we'll contact you within 24 hours ✨",
+    testimTag: "Student & Parent Reviews",
+    testimTitle: "What They ", testimTitleHighlight: "Say", testimTitle2: " About Us",
+    testimSubtitle: "Real experiences from parents and students who learned with us",
+    contactTag: "Contact Us", contactTitle: "We're ",
+    contactTitleHighlight: "Always", contactTitle2: " Here",
+    contactWhatsapp: "WhatsApp", contactFacebook: "Facebook",
+    comingSoon: "Coming Soon ✨",
+    sendMsg: "Send Us a Message",
+    msgName: "Your Name", msgText: "Your Message", sendViawp: "Send via WhatsApp",
+    footerTagline: "We Turn Dreams Into Code — Coding & Technology Education for Kids & Beginners",
+    footerLinks: "Quick Links", footerCourses: "Courses",
+    copyright: "© 2026 Sunshine T Academy — All Rights Reserved",
+    viewDetails: "Details", perCourse: "/ course",
+    modalAge: "Suitable Age", modalDuration: "Duration",
+    modalLevel: "Level", modalObjectives: "Course Objectives",
+    modalCurriculum: "Course Content", modalEnrollNow: "Enroll in This Course",
+    modalGallery: "Photo Gallery", modalVideoTitle: "Watch Course Preview",
+    modalVideoSub: "Introduction video coming soon",
+    galleryTag: "Student Gallery", galleryTitle: "Our Students' ",
+    galleryTitleHighlight: "Projects", galleryTitle2: " & Work",
+    gallerySubtitle: "Real projects and products created by Sunshine T Academy students",
+    gal1: "Scratch Games", gal2: "Python Projects", gal3: "HTML + CSS Websites",
+    gal4: "App Inventor Apps", gal5: "Arduino Projects", gal6: "Certificate Ceremony",
+    gal7: "Canva Designs", gal8: "Live Coding Sessions", gal9: "Student Success Moments"
+  }
+};
+
+/* ============================================
+   COURSES DATA
+   ============================================ */
+const coursesData = [
+  {
+    id: 1, icon: "🎨", color: "blue",
+    nameAr: "سكراتش", nameEn: "Scratch",
+    levelAr: "مبتدئ", levelEn: "Beginner",
+    age: "7+", levels: 1,
+    descAr: "أول خطوة في عالم البرمجة! ابني ألعاب وأنيميشن بالبلوكس الملونة. مش محتاج تكتب كود.",
+    descEn: "First step into coding! Build games and animations using colorful blocks. No typing needed.",
+    objectives: {
+      ar: ["التفكير المنطقي وحل المشكلات", "بناء الألعاب والقصص التفاعلية", "تطوير الإبداع والخيال", "أساسيات البرمجة المرئية"],
+      en: ["Logical thinking & problem solving", "Build games and interactive stories", "Develop creativity", "Visual programming basics"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-5: البيئة والحركة والأحداث", "المحاضرات 6-10: الشروط والتكرار والمتغيرات", "المحاضرات 11-15: الصوت والمظهر والتفاعل", "المحاضرات 16-18: مشروع نهائي — لعبة كاملة"],
+      en: ["Sessions 1-5: Environment, movement, events", "Sessions 6-10: Conditions, loops, variables", "Sessions 11-15: Sound, looks, interaction", "Sessions 16-18: Final project — complete game"]
+    },
+    emojis: ["🎮", "🌟", "🎭"],
+    price: 1800
+  },
+  {
+    id: 2, icon: "📱", color: "teal",
+    nameAr: "آب إنفنتر", nameEn: "App Inventor",
+    levelAr: "مبتدئ – متوسط", levelEn: "Beginner – Intermediate",
+    age: "10+", levels: 1,
+    descAr: "صمّم وابني تطبيقات أندرويد حقيقية تنزّلها على موبايلك! بدون كتابة كود معقد.",
+    descEn: "Design and build real Android apps you can install on your phone! No complex code needed.",
+    objectives: {
+      ar: ["تصميم واجهات التطبيقات", "برمجة منطق التطبيق بالبلوكس", "ربط التطبيق بالإنترنت وقاعدة البيانات", "نشر التطبيق على الهاتف"],
+      en: ["App UI design", "Logic programming with blocks", "Connecting to internet & databases", "Publishing app to phone"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-5: مقدمة وأول تطبيق", "المحاضرات 6-10: الأزرار والصوت والصور", "المحاضرات 11-15: قواعد البيانات والإنترنت", "المحاضرات 16-18: مشروع تطبيق كامل"],
+      en: ["Sessions 1-5: Intro and first app", "Sessions 6-10: Buttons, sound, images", "Sessions 11-15: Databases & internet", "Sessions 16-18: Complete app project"]
+    },
+    emojis: ["📲", "💡", "🔧"],
+    price: 1800
+  },
+  {
+    id: 3, icon: "🐍", color: "gold",
+    nameAr: "بايثون", nameEn: "Python",
+    levelAr: "مستويين", levelEn: "2 Levels",
+    age: "10+", levels: 2,
+    descAr: "لغة البرمجة الأشهر في العالم! من الأساسيات لحد المشاريع الحقيقية. 20 محاضرة بالمستوى الأول.",
+    descEn: "The world's most popular language! From basics to real projects. 20 sessions at Level 1.",
+    objectives: {
+      ar: ["المتغيرات والبيانات والإدخال", "الشروط والحلقات والدوال", "القوائم والـ Strings والـ Dictionaries", "مشاريع: لعبة، حاسبة، to-do، quiz"],
+      en: ["Variables, data types, input", "Conditions, loops, functions", "Lists, strings, dictionaries", "Projects: game, calculator, to-do, quiz"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-5: Print / Variables / Input / Math / if-else", "المحاضرات 6-10: elif / for / while / Lists", "المحاضرات 11-15: Functions / Strings / Dictionaries", "المحاضرات 16-20: Mini Projects + Final Quiz Game"],
+      en: ["Sessions 1-5: Print / Variables / Input / Math / if-else", "Sessions 6-10: elif / for / while / Lists", "Sessions 11-15: Functions / Strings / Dictionaries", "Sessions 16-20: Mini Projects + Final Quiz Game"]
+    },
+    emojis: ["💻", "⚡", "🏆"],
+    price: 1800
+  },
+  {
+    id: 4, icon: "🤖", color: "orange",
+    nameAr: "أردوينو وروبوتكس", nameEn: "Arduino & Robotics",
+    levelAr: "متوسط", levelEn: "Intermediate",
+    age: "12+", levels: 1,
+    descAr: "ابني دوائر كهربائية حقيقية وبرمج روبوتات! الدمج بين البرمجة والإلكترونيات.",
+    descEn: "Build real electronic circuits and program robots! The perfect mix of coding and electronics.",
+    objectives: {
+      ar: ["أساسيات الإلكترونيات والدوائر", "برمجة الأردوينو بلغة C", "التحكم في الموتورات والـ LEDs والـ Sensors", "مشروع روبوت متكامل"],
+      en: ["Electronics & circuits basics", "Programming Arduino in C", "Control motors, LEDs, sensors", "Complete robot project"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-5: مقدمة إلكترونيات + LED + Buzzer", "المحاضرات 6-10: Sensors + موتورات + LCD", "المحاضرات 11-15: المشاريع التطبيقية", "المحاضرات 16-18: روبوت نهائي"],
+      en: ["Sessions 1-5: Electronics intro + LED + Buzzer", "Sessions 6-10: Sensors + motors + LCD", "Sessions 11-15: Applied projects", "Sessions 16-18: Final robot"]
+    },
+    emojis: ["⚡", "🔌", "🛠️"],
+    price: 1800
+  },
+  {
+    id: 5, icon: "🌐", color: "red",
+    nameAr: "HTML + CSS", nameEn: "HTML + CSS",
+    levelAr: "مستويين", levelEn: "2 Levels",
+    age: "10+", levels: 2,
+    descAr: "ابني مواقع ويب جميلة من الصفر! أساس الإنترنت — تعلّم HTML وCSS وعمل مواقع متجاوبة.",
+    descEn: "Build beautiful websites from scratch! The foundation of the web — learn HTML, CSS and responsive design.",
+    objectives: {
+      ar: ["بناء هيكل الصفحة بـ HTML", "التنسيق والألوان بـ CSS", "Flexbox و Grid للتخطيط", "مواقع متجاوبة مع الموبايل"],
+      en: ["HTML page structure", "CSS styling & colors", "Flexbox & Grid layout", "Mobile-responsive websites"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-6: HTML الأساسية والوسوم", "المحاضرات 7-12: CSS والتنسيق والألوان", "المحاضرات 13-16: Flexbox وGrid", "المحاضرات 17-18: مشروع موقع كامل"],
+      en: ["Sessions 1-6: HTML basics & tags", "Sessions 7-12: CSS styling & colors", "Sessions 13-16: Flexbox & Grid", "Sessions 17-18: Complete website project"]
+    },
+    emojis: ["🎨", "📐", "🌍"],
+    price: 1800
+  },
+  {
+    id: 6, icon: "☕", color: "purple",
+    nameAr: "جافا", nameEn: "Java",
+    levelAr: "متقدم", levelEn: "Advanced",
+    age: "13+", levels: 1,
+    descAr: "البرمجة الكائنية الاحترافية المستخدمة في تطوير الأندرويد والشركات الكبرى.",
+    descEn: "Professional OOP programming used in Android development and enterprise companies.",
+    objectives: {
+      ar: ["البرمجة الكائنية OOP", "الـ Classes والـ Objects والـ Methods", "هياكل البيانات والخوارزميات", "مشروع تطبيق جافا كامل"],
+      en: ["Object-Oriented Programming OOP", "Classes, Objects & Methods", "Data structures & algorithms", "Complete Java application project"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-5: الأساسيات والمتغيرات", "المحاضرات 6-10: Classes وOOP", "المحاضرات 11-15: Arrays وCollections", "المحاضرات 16-18: مشروع نهائي"],
+      en: ["Sessions 1-5: Basics & variables", "Sessions 6-10: Classes & OOP", "Sessions 11-15: Arrays & Collections", "Sessions 16-18: Final project"]
+    },
+    emojis: ["💼", "🏗️", "⚙️"],
+    price: 1800
+  },
+  {
+    id: 7, icon: "🎨", color: "violet",
+    nameAr: "كانفا وجرافيك ديزاين", nameEn: "Canva & Graphic Design",
+    levelAr: "مبتدئ", levelEn: "Beginner",
+    age: "8+", levels: 1,
+    descAr: "صمّم لوجوهات وبوسترات ومحتوى سوشيال ميديا احترافي بـ Canva — مهارة الحاضر والمستقبل.",
+    descEn: "Design logos, posters, and professional social media content with Canva — a skill for today and tomorrow.",
+    objectives: {
+      ar: ["مبادئ التصميم والألوان والـ Typography", "تصميم بوسترات وبطاقات وشعارات", "محتوى سوشيال ميديا احترافي", "بناء الهوية البصرية للمشاريع"],
+      en: ["Design principles, colors & typography", "Design posters, cards, logos", "Professional social media content", "Building visual brand identity"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-5: مقدمة Canva ومبادئ التصميم", "المحاضرات 6-10: البوسترات والبطاقات", "المحاضرات 11-15: سوشيال ميديا ومحتوى التسويق", "المحاضرات 16-18: مشروع هوية بصرية كاملة"],
+      en: ["Sessions 1-5: Canva intro & design principles", "Sessions 6-10: Posters & cards", "Sessions 11-15: Social media & marketing content", "Sessions 16-18: Complete visual identity project"]
+    },
+    emojis: ["🎭", "🖌️", "✨"],
+    price: 1800
+  },
+  {
+    id: 8, icon: "💻", color: "cyan",
+    nameAr: "مهارات الكمبيوتر", nameEn: "Computer Skills",
+    levelAr: "مبتدئ", levelEn: "Beginner",
+    age: "8+", levels: 1,
+    descAr: "المهارات الأساسية اللي كل طالب محتاجها: Word + PowerPoint + Canva المستوى الأول.",
+    descEn: "Essential skills every student needs: Word, PowerPoint and Canva Level 1.",
+    objectives: {
+      ar: ["إتقان Microsoft Word للكتابة والتنسيق", "PowerPoint للعروض التقديمية الاحترافية", "Canva للتصميم البسيط", "مهارات الكمبيوتر الأساسية"],
+      en: ["Microsoft Word for writing & formatting", "PowerPoint for professional presentations", "Canva for basic design", "Core computer literacy skills"]
+    },
+    curriculum: {
+      ar: ["المحاضرات 1-6: Microsoft Word كامل", "المحاضرات 7-12: PowerPoint الاحترافي", "المحاضرات 13-16: Canva للمبتدئين", "المحاضرات 17-18: مشروع تقديمي متكامل"],
+      en: ["Sessions 1-6: Full Microsoft Word", "Sessions 7-12: Professional PowerPoint", "Sessions 13-16: Canva for Beginners", "Sessions 17-18: Complete presentation project"]
+    },
+    emojis: ["📄", "📊", "🖥️"],
+    price: 1800
+  }
+];
+
+/* ============================================
+   TESTIMONIALS DATA
+   ============================================ */
+const testimonialsData = [
+  { textAr: "ابنتي حبّت سكراتش جداً — عملت لعبتها الأولى في الأسبوع الثالث ومتيقفتش بعد كده!", textEn: "My daughter loved Scratch — she built her first game in week 3 and never stopped after that!", nameAr: "أم نور — القاهرة", nameEn: "Nour's Mom — Cairo", course: "Scratch", initial: "ن" },
+  { textAr: "كورس Python Level 1 كان رائع — ابني بيكتب كود حقيقي دلوقتي وفخور بيه جداً.", textEn: "Python Level 1 was amazing — my son writes real code now and is super proud of himself.", nameAr: "أبو أحمد — الإسكندرية", nameEn: "Ahmed's Dad — Alexandria", course: "Python", initial: "أ" },
+  { textAr: "المدرس بيشرح بطريقة الأطفال بيفهموا بيها بالظبط — ما في سؤال يمشي من غير إجابة.", textEn: "The teacher explains in exactly the way kids understand — no question goes unanswered.", nameAr: "أم سارة — الجيزة", nameEn: "Sarah's Mom — Giza", course: "HTML + CSS", initial: "س" },
+  { textAr: "سجلنا اتنين أخوات مع بعض — الخصم حلو والجودة أحلى. شكراً Sunshine T!", textEn: "Enrolled 2 siblings together — great discount and even better quality. Thanks Sunshine T!", nameAr: "ولي أمر — القاهرة الجديدة", nameEn: "Parent — New Cairo", course: "Scratch + Python", initial: "م" },
+  { textAr: "بنتي عملت موقعها الأول بعد كورس HTML+CSS — وكمان صممت نفسها بـ Canva!", textEn: "My daughter built her first website after HTML+CSS — and also designed it herself with Canva!", nameAr: "أم مريم — أكتوبر", nameEn: "Maryam's Mom — October", course: "HTML + CSS", initial: "م" }
+];
+
+/* ============================================
+   LANGUAGE STATE
+   ============================================ */
+let currentLang = 'ar';
+
+function t(key) {
+  return translations[currentLang][key] || translations.ar[key] || key;
+}
+
+function toggleLanguage() {
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  const html = document.documentElement;
+  html.setAttribute('lang', currentLang);
+  html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+  document.getElementById('langLabel').textContent = currentLang === 'ar' ? 'EN' : 'AR';
+  document.body.classList.toggle('lang-en', currentLang === 'en');
+  applyTranslations();
+  renderCourses();
+  renderTestimonials();
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+  });
+}
+
+document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+
+/* ============================================
+   RENDER COURSES
+   ============================================ */
+function renderCourses() {
+  const grid = document.getElementById('coursesGrid');
+  grid.innerHTML = coursesData.map((c, i) => `
+    <div class="course-card" data-color="${c.color}" data-aos="fade-up" data-aos-delay="${(i % 3) * 80}" onclick="openModal(${c.id})">
+      <div class="course-icon-wrap">${c.icon}</div>
+      <div class="course-badges">
+        <span class="badge badge-level">${currentLang === 'ar' ? c.levelAr : c.levelEn}</span>
+        <span class="badge badge-age">🎂 ${c.age}</span>
+        ${c.levels > 1 ? `<span class="badge badge-levels">📚 ${c.levels} ${currentLang === 'ar' ? 'مستويات' : 'Levels'}</span>` : ''}
+      </div>
+      <div class="course-name">${currentLang === 'ar' ? c.nameAr : c.nameEn}</div>
+      <div class="course-desc">${currentLang === 'ar' ? c.descAr : c.descEn}</div>
+      <div class="course-footer">
+        <div class="course-price">${c.price.toLocaleString()} EGP <span>${t('perCourse')}</span></div>
+        <button class="btn-details">${t('viewDetails')} →</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================
+   RENDER TESTIMONIALS
+   ============================================ */
+function renderTestimonials() {
+  const container = document.getElementById('testimonialsContainer');
+  container.innerHTML = testimonialsData.map(t2 => `
+    <div class="swiper-slide">
+      <div class="testimonial-card">
+        <div class="quote-icon">"</div>
+        <div class="testimonial-text">${currentLang === 'ar' ? t2.textAr : t2.textEn}</div>
+        <div class="testimonial-footer">
+          <div class="avatar">${t2.initial}</div>
+          <div>
+            <div class="reviewer-name">${currentLang === 'ar' ? t2.nameAr : t2.nameEn}</div>
+            <div class="reviewer-course">${t2.course}</div>
+          </div>
+          <div class="stars" style="margin-right:auto">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  if (window.swiperInstance) window.swiperInstance.destroy();
+  window.swiperInstance = new Swiper('.swiper', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    pagination: { el: '.swiper-pagination', clickable: true },
+    autoplay: { delay: 4000, disableOnInteraction: false },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+function openModal(courseId) {
+  const c = coursesData.find(x => x.id === courseId);
+  if (!c) return;
+
+  document.getElementById('modalHeaderContent').innerHTML = `
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;padding-top:8px">
+      <span style="font-size:2.5rem">${c.icon}</span>
+      <div>
+        <div style="font-size:1.6rem;font-weight:700">${currentLang === 'ar' ? c.nameAr : c.nameEn}</div>
+        <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+          <span class="badge badge-level">${currentLang === 'ar' ? c.levelAr : c.levelEn}</span>
+          <span class="badge badge-age">🎂 ${t('modalAge')}: ${c.age}</span>
+          <span class="badge badge-levels">📚 18 ${currentLang === 'ar' ? 'محاضرة' : 'sessions'}</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('modalBody').innerHTML = `
+    <p style="color:var(--text-secondary);margin-bottom:24px">${currentLang === 'ar' ? c.descAr : c.descEn}</p>
+
+    <div style="font-size:0.8rem;color:var(--accent-gold);font-family:var(--font-code);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">${t('modalGallery')}</div>
+    <div class="modal-gallery">
+      ${c.emojis.map(e => `<div class="gallery-thumb">${e}</div>`).join('')}
+    </div>
+
+    <div class="video-placeholder">
+      <div class="play-btn">▶</div>
+      <div style="font-weight:600">${t('modalVideoTitle')}</div>
+      <div style="font-size:0.8rem">${t('modalVideoSub')}</div>
+    </div>
+
+    <div style="font-size:0.8rem;color:var(--accent-gold);font-family:var(--font-code);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;margin-top:24px">${t('modalObjectives')}</div>
+    <ul class="modal-objectives">
+      ${(currentLang === 'ar' ? c.objectives.ar : c.objectives.en).map(o => `<li>${o}</li>`).join('')}
+    </ul>
+
+    <div style="font-size:0.8rem;color:var(--accent-gold);font-family:var(--font-code);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;margin-top:24px">${t('modalCurriculum')}</div>
+    <ul class="modal-objectives">
+      ${(currentLang === 'ar' ? c.curriculum.ar : c.curriculum.en).map(o => `<li>${o}</li>`).join('')}
+    </ul>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding:24px;background:var(--bg-secondary);border-radius:var(--radius);border:1px solid var(--border-glow)">
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--accent-gold)">${c.price.toLocaleString()} EGP</div>
+        <div style="font-size:0.8rem;color:var(--text-muted)">${t('perCourse')} / 18 ${currentLang === 'ar' ? 'محاضرة' : 'sessions'}</div>
+      </div>
+      <a href="#enroll" class="btn-primary" onclick="closeModal()">${t('modalEnrollNow')}</a>
+    </div>
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnOverlay(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+/* ============================================
+   ENROLLMENT FORM
+   ============================================ */
+const coursesCheckboxes = coursesData.map(c => `
+  <label class="checkbox-item">
+    <input type="checkbox" value="${c.nameAr}"> ${c.icon} ${c.nameAr} / ${c.nameEn}
+  </label>
+`).join('');
+
+function getStudentBlock(index) {
+  return `
+    <div class="student-block">
+      <div class="student-block-title">
+        <i class="fa-solid fa-user-graduate"></i>
+        ${currentLang === 'ar' ? `الطالب ${index + 1}` : `Student ${index + 1}`}
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>${currentLang === 'ar' ? 'اسم الطالب *' : 'Student Name *'}</label>
+          <input type="text" id="studentName${index}" placeholder="${currentLang === 'ar' ? 'الاسم الكامل' : 'Full name'}">
+        </div>
+        <div class="form-group">
+          <label>${currentLang === 'ar' ? 'العمر *' : 'Age *'}</label>
+          <input type="number" id="studentAge${index}" min="7" max="25" placeholder="${currentLang === 'ar' ? 'العمر' : 'Age'}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>${currentLang === 'ar' ? 'الجنس' : 'Gender'}</label>
+          <select id="studentGender${index}">
+            <option value="">${currentLang === 'ar' ? 'اختر' : 'Select'}</option>
+            <option value="ذكر">${currentLang === 'ar' ? 'ذكر' : 'Male'}</option>
+            <option value="أنثى">${currentLang === 'ar' ? 'أنثى' : 'Female'}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>${currentLang === 'ar' ? 'درس برمجة قبل كده؟' : 'Studied coding before?'}</label>
+          <select id="studentPrev${index}">
+            <option value="">${currentLang === 'ar' ? 'اختر' : 'Select'}</option>
+            <option value="لا">${currentLang === 'ar' ? 'لا — مبتدئ' : 'No — Beginner'}</option>
+            <option value="نعم">${currentLang === 'ar' ? 'نعم' : 'Yes'}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>${currentLang === 'ar' ? 'الكورسات اللي عايزها دلوقتي:' : 'Desired courses:'}</label>
+        <div class="checkboxes-grid" id="coursesFor${index}">
+          ${coursesCheckboxes}
+        </div>
+      </div>
+      <div class="form-group">
+        <label>${currentLang === 'ar' ? 'الوقت المفضل:' : 'Preferred time:'}</label>
+        <select id="studentSchedule${index}">
+          <option value="">${currentLang === 'ar' ? 'اختر' : 'Select'}</option>
+          <option value="صباح">${currentLang === 'ar' ? '🌅 صباح' : '🌅 Morning'}</option>
+          <option value="بعد الظهر">${currentLang === 'ar' ? '☀️ بعد الظهر' : '☀️ Afternoon'}</option>
+          <option value="مساء">${currentLang === 'ar' ? '🌙 مساء' : '🌙 Evening'}</option>
+        </select>
+      </div>
+    </div>
+  `;
+}
+
+function updateStudentBlocks() {
+  const num = parseInt(document.getElementById('numStudents').value);
+  const container = document.getElementById('studentsContainer');
+  container.innerHTML = '';
+  for (let i = 0; i < num; i++) {
+    container.innerHTML += getStudentBlock(i);
+  }
+}
+
+function submitForm() {
+  const parentName = document.getElementById('parentName').value;
+  const parentPhone = document.getElementById('parentPhone').value;
+  if (!parentName || !parentPhone) {
+    alert(currentLang === 'ar' ? 'من فضلك اكمل بياناتك الأساسية (الاسم ورقم الواتساب)' : 'Please fill in your name and WhatsApp number');
+    return;
+  }
+
+  const num = parseInt(document.getElementById('numStudents').value);
+  const country = document.getElementById('parentCountry').value;
+  const city = document.getElementById('parentCity').value;
+  const email = document.getElementById('parentEmail').value;
+  const howHeard = document.getElementById('howHeard').value;
+  const notes = document.getElementById('notes').value;
+
+  let msg = `🌟 *Sunshine T Academy — طلب تسجيل جديد*\n\n`;
+  msg += `👨‍👧 *ولي الأمر:* ${parentName}\n`;
+  msg += `📞 *الواتساب:* ${parentPhone}\n`;
+  if (email) msg += `📧 *الإيميل:* ${email}\n`;
+  msg += `🌍 *الدولة/المدينة:* ${country} — ${city}\n`;
+  if (howHeard) msg += `📢 *عرف عنّا من:* ${howHeard}\n`;
+  msg += `\n👨‍🎓 *عدد الطلاب: ${num}*\n`;
+
+  for (let i = 0; i < num; i++) {
+    const name = document.getElementById(`studentName${i}`)?.value || '—';
+    const age = document.getElementById(`studentAge${i}`)?.value || '—';
+    const gender = document.getElementById(`studentGender${i}`)?.value || '—';
+    const prev = document.getElementById(`studentPrev${i}`)?.value || '—';
+    const schedule = document.getElementById(`studentSchedule${i}`)?.value || '—';
+    const checkboxes = document.querySelectorAll(`#coursesFor${i} input[type="checkbox"]:checked`);
+    const courses = Array.from(checkboxes).map(cb => cb.value).join(', ') || '—';
+    msg += `\n📌 *الطالب ${i + 1}:*\n`;
+    msg += `  الاسم: ${name}\n  العمر: ${age}\n  الجنس: ${gender}\n`;
+    msg += `  سبق ودرس: ${prev}\n  الكورسات: ${courses}\n  الوقت: ${schedule}\n`;
+  }
+
+  if (notes) msg += `\n💬 *ملاحظات:* ${notes}\n`;
+  msg += `\n✨ أرسلت من موقع Sunshine T Academy`;
+
+  const waUrl = `https://wa.me/201080680930?text=${encodeURIComponent(msg)}`;
+  window.open(waUrl, '_blank');
+
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+/* ============================================
+   CONTACT MESSAGE
+   ============================================ */
+function sendContactMsg() {
+  const name = document.getElementById('contactName').value || 'زائر';
+  const msg = document.getElementById('contactMsg').value;
+  if (!msg) return;
+  const text = `مرحبا من موقع Sunshine T Academy!\nاسمي: ${name}\n\n${msg}`;
+  window.open(`https://wa.me/201080680930?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+/* ============================================
+   BACKGROUND STARS CANVAS
+   ============================================ */
+function initCanvas() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const stars = Array.from({length: 120}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.3,
+    o: Math.random() * 0.5 + 0.1,
+    s: (Math.random() - 0.5) * 0.15
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.y += s.s;
+      if (s.y < 0) s.y = canvas.height;
+      if (s.y > canvas.height) s.y = 0;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.o})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+
+/* ============================================
+   COUNTER ANIMATION
+   ============================================ */
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-count'));
+    let current = 0;
+    const step = Math.ceil(target / 40);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current + (target >= 100 ? '+' : '+');
+      if (current >= target) clearInterval(timer);
+    }, 40);
+  });
+}
+
+/* ============================================
+   NAVBAR SCROLL
+   ============================================ */
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* ============================================
+   INTERSECTION OBSERVER (counters)
+   ============================================ */
+const heroStats = document.querySelector('.hero-stats');
+let counted = false;
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    animateCounters();
+  }
+});
+if (heroStats) observer.observe(heroStats);
+
+/* ============================================
+   INIT
+   ============================================ */
+AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+initCanvas();
+renderCourses();
+renderTestimonials();
+updateStudentBlocks();
+applyTranslations();
+</script>
+
+</body>
+</html>
